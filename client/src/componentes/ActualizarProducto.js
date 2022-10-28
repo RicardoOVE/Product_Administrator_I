@@ -13,7 +13,7 @@ const ActualizarProducto = () => {
 
     // se ejecuta el useEffect cada que se cambie la variable que esta en [ ]
     useEffect(() => {
-        axios.get("httpm://localhost:8000/api/productos/"+ id)
+        axios.get("http://localhost:8000/api/productos/"+ id)
         .then(res =>{
             setNombre(res.data.nombre);
             setPrecio(res.data.precio);
@@ -22,10 +22,26 @@ const ActualizarProducto = () => {
         .catch(err => console.log(err));
     }, [id]);
 
+    //Función de actualización
+    const updateProducto = e => {
+        e.preventDefault();
+        axios.put("http://localhost:8000/api/productos/"+ id, {
+            nombre,
+            precio,
+            descripcion
+        })
+            .then(res => history.push("/"))
+            .catch(err => console.log(err));
+    }
+
+    const borrarProducto = id => {
+        axios.delete("http://localhost:8000/api/productos/" + id)
+    }
+
     return(
         <div>
             <h1>Editar Producto</h1>
-            <form>
+            <form onSubmit={updateProducto}>
                 <div className="form-group">
                     <label htmlFor="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" className="form-control" value={nombre} onChange={e=>setNombre(e.target.value)} />
@@ -38,12 +54,12 @@ const ActualizarProducto = () => {
                     <label htmlFor="descripcion">Descripción:</label>
                     <input type="text" id="descripcion" name="descripcion" className="form-control" value={descripcion} onChange={e=>setDescripcion(e.target.value)} />
                 </div>
-                <input type="submit" value="Guardar" className="btn btn-success" />
-                <Link to="/" className="btn btn-danger">Cancelar</Link>
+                <input type="submit" value="Guardar" className="btn btn-success m-2" />
+                <Link to="/" className="btn btn-danger m-2">Cancelar</Link>
+                <Link to="/" onClick={() => borrarProducto(id)} className="btn btn-warning m-2">Eliminar</Link>
             </form>
         </div>
     )
-    
 }
 
 export default ActualizarProducto;

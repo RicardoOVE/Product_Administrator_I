@@ -14,10 +14,19 @@ const TodosProductos = props => {
             .catch(err => console.log(err));
     }, []);
 
+    const borrarProducto = id => {
+        axios.delete("http://localhost:8000/api/productos/" + id)
+        .then(res => {
+            //Actualizamos lista a través de filter
+            let nuevaLista = productos.filter(producto => producto._id !== id);
+            setProductos(nuevaLista);
+        })
+    }
+
     return (
         <div>
             <h1>Todos los productos</h1>
-            <Link to="/nuevo" className="btn btn-success">Nuevo Producto</Link>
+            <Link to="/nuevo" className="btn btn-success m-2">Nuevo Producto</Link>
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -35,11 +44,11 @@ const TodosProductos = props => {
                                 <td>{producto.precio}</td>
                                 <td>{producto.descripcion}</td>
                                 <td>
-                                    <Link to={`/producto/${producto._id}`} className="btn btn-primary">Detalle</Link>
+                                    <Link to={`/producto/${producto._id}`} className="btn btn-primary m-1">Detalle</Link>
 
-                                    <Link to={`/producto/editar/${producto._id}`} className="btn btn-warning">Editar</Link>
+                                    <Link to={`/producto/editar/${producto._id}`} className="btn btn-warning m-1">Editar</Link>
 
-                                    <button className="btn btn-danger">Eliminar</button>
+                                    <button className="btn btn-danger m-1" onClick={() => borrarProducto(producto._id)}>Eliminar</button>
                                 </td>
                             </tr>
                         ))
