@@ -14,6 +14,10 @@ const Producto = () => {
             .catch(err => console.log(err));
     }, [id]);
 
+    const borrarProducto = id => {
+        axios.delete("http://localhost:8000/api/productos/" + id)
+    }
+
     return(
         <div className="card bg-success text-light">
             <div className="card-header"><h1>{producto.nombre}</h1></div>
@@ -23,6 +27,7 @@ const Producto = () => {
                     {producto.descripcion}
                 </p>
                 <Link to="/" className="btn btn-primary">Regresar</Link>
+                <Link to="/" onClick={() => borrarProducto(id)} className="btn btn-warning m-2">Eliminar</Link>
             </div>
         </div>
     )
