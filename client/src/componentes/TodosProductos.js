@@ -36,6 +36,10 @@ const TodosProductos = props => {
                                 <td>{producto.descripcion}</td>
                                 <td>
                                     <Link to={`/producto/${producto._id}`} className="btn btn-primary">Detalle</Link>
+
+                                    <Link to={`/producto/editar/${producto._id}`} className="btn btn-warning">Editar</Link>
+
+                                    <button className="btn btn-danger">Eliminar</button>
                                 </td>
                             </tr>
                         ))

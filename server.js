@@ -2,7 +2,7 @@
 npm init -y
 "start": "nodemon server.js"
 npm install express mongoose cors
-create folders
+create subfolders (in server folder)
 
 2nda terminal (instalación React):
 npx create-react-app client
@@ -16,9 +16,7 @@ npm start
 
 Agregar link a bootstrap en index.html
 Quitar <React.StrictMode> en index.js
-Test
 */
-
 
 const express = require("express");
 const cors = require("cors");
