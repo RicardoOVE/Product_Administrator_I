@@ -18,7 +18,7 @@ const ActualizarProducto = () => {
             setNombre(res.data.nombre);
             setPrecio(res.data.precio);
             setDescripcion(res.data.descripcion);
-        })
+        }) 
         .catch(err => console.log(err));
     }, [id]);
 
